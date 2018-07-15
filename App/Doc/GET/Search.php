@@ -31,7 +31,8 @@ class Search extends \Core\Controller\Controller {
         $tree = \Core\Func\CoreFunc::$param['treeList'];
         $system = \Core\Func\CoreFunc::$param['system'];
 
-
+		if ($result['list'])
+		{
         foreach($result['list'] as $item){
 
             if($system['change_version'] == 0 && $tree[$item['tree_parent']]['tree_version']  != $item['tree_version']  ){
@@ -39,8 +40,8 @@ class Search extends \Core\Controller\Controller {
             }
 
             $list["{$item['tree_version']}|{$item['tree_parent']}"][] = $item;
+            }
         }
-
         krsort($list);
         $this->assign('page', $result['page']);
         $this->assign('list', $list);
